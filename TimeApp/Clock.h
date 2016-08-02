@@ -19,13 +19,14 @@
 #include <wx/statbox.h>
 #include <wx/frame.h>
 #include <wx/datetime.h>
+#include <wx/checkbox.h>
 
 class Clock: public wxFrame {
 
 protected:
 	wxChoice* m_choice1;
-	wxChoice* m_choice2;
-	wxChoice* m_choice3;
+	wxCheckBox* amPm;
+	wxCheckBox* DateCheck;
 
 
 	wxStaticText* Slot1;
