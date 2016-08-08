@@ -58,7 +58,7 @@ Timer::Timer(wxWindow* parent, wxWindowID id, const wxString& title,
 	sbSizer9 = new wxStaticBoxSizer(
 			new wxStaticBox(this, wxID_ANY, wxT("Count:")), wxHORIZONTAL);
 
-	Hours = new wxStaticText(this, wxID_ANY, wxT("00"), wxDefaultPosition,
+	Hours = new wxStaticText(this, wxID_ANY, wxT(" 0"), wxDefaultPosition,
 			wxDefaultSize, 0);
 	Hours->Wrap(-1);
 	Hours->SetFont(wxFont(40, 76, 90, 90, false, wxT("Monospace")));
@@ -76,7 +76,7 @@ Timer::Timer(wxWindow* parent, wxWindowID id, const wxString& title,
 
 	sbSizer9->Add(0, 0, 1, wxEXPAND, 5);
 
-	Minutes = new wxStaticText(this, wxID_ANY, wxT("00"), wxDefaultPosition,
+	Minutes = new wxStaticText(this, wxID_ANY, wxT(" 0"), wxDefaultPosition,
 			wxDefaultSize, 0);
 	Minutes->Wrap(-1);
 	Minutes->SetFont(wxFont(40, 76, 90, 90, false, wxT("Monospace")));
@@ -94,7 +94,7 @@ Timer::Timer(wxWindow* parent, wxWindowID id, const wxString& title,
 
 	sbSizer9->Add(0, 0, 1, wxEXPAND, 5);
 
-	Seconds = new wxStaticText(this, wxID_ANY, wxT("00"), wxDefaultPosition,
+	Seconds = new wxStaticText(this, wxID_ANY, wxT(" 0"), wxDefaultPosition,
 			wxDefaultSize, 0);
 	Seconds->Wrap(-1);
 	Seconds->SetFont(wxFont(40, 76, 90, 90, false, wxT("Monospace")));
@@ -159,25 +159,6 @@ void Timer::OnTimer(wxTimerEvent& event) {
 
 	else {
 
-		if (seconds == 0) {
-
-			if (minutes != 0) {
-				minutes--;
-				Minutes->SetLabel(wxString::Format(wxT("%i"), minutes));
-			}
-
-			else if (hours != 0) {
-				hours--;
-				Hours->SetLabel(wxString::Format(wxT("%i"), hours));
-				minutes = 59;
-				Minutes->SetLabel(wxString::Format(wxT("%i"), minutes));
-			}
-			seconds = 59;
-			Seconds->SetLabel(wxString::Format(wxT("%i"), seconds));
-		}
-		seconds--;
-		Seconds->SetLabel(wxString::Format(wxT("%i"), seconds));
-
 		if (seconds == 0 && minutes == 0 && hours == 0) {
 			timer->Stop();
 			initialized = false;
@@ -186,6 +167,28 @@ void Timer::OnTimer(wxTimerEvent& event) {
 			wxMessageDialog *dial = new wxMessageDialog(NULL,
 					wxT("Time is out!"), wxT("Info"), wxOK);
 			dial->ShowModal();
+		}
+		else {
+
+			if (seconds == 0) {
+
+				if (minutes != 0) {
+					minutes--;
+					Minutes->SetLabel(wxString::Format(wxT("%i"), minutes));
+				}
+
+				else if (hours != 0) {
+					hours--;
+					Hours->SetLabel(wxString::Format(wxT("%i"), hours));
+					minutes = 59;
+					Minutes->SetLabel(wxString::Format(wxT("%i"), minutes));
+				}
+				seconds = 59;
+				Seconds->SetLabel(wxString::Format(wxT("%i"), seconds));
+			}
+			seconds--;
+			Seconds->SetLabel(wxString::Format(wxT("%i"), seconds));
+
 		}
 	}
 }
