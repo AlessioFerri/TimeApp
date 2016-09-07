@@ -29,8 +29,8 @@ class Timer : public wxFrame
 		wxStaticText* Minutes;
 		wxStaticText* m_staticText23;
 		wxStaticText* Seconds;
-
 		wxButton* InitBtn;
+
 		wxButton* StartBtn;
 		wxButton* StopBtn;
 		wxButton* ZeroBtn;
