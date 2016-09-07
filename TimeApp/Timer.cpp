@@ -7,15 +7,13 @@
 
 #include "Timer.h"
 
-enum {
-	TIMER_ID = 10
-};
+
 
 Timer::Timer(wxWindow* parent, wxWindowID id, const wxString& title,
 		const wxPoint& pos, const wxSize& size, long style) :
 		wxFrame(parent, id, title, pos, size, style), initialized(false) {
 
-	timer = new wxTimer(this, TIMER_ID);
+	timer = new wxTimer(this);
 
 	this->SetSizeHints(wxDefaultSize, wxDefaultSize);
 
@@ -58,7 +56,7 @@ Timer::Timer(wxWindow* parent, wxWindowID id, const wxString& title,
 	sbSizer9 = new wxStaticBoxSizer(
 			new wxStaticBox(this, wxID_ANY, wxT("Count:")), wxHORIZONTAL);
 
-	Hours = new wxStaticText(this, wxID_ANY, wxT(" 0"), wxDefaultPosition,
+	Hours = new wxStaticText(this, wxID_ANY, wxT("00"), wxDefaultPosition,
 			wxDefaultSize, 0);
 	Hours->Wrap(-1);
 	Hours->SetFont(wxFont(40, 76, 90, 90, false, wxT("Monospace")));
@@ -76,7 +74,7 @@ Timer::Timer(wxWindow* parent, wxWindowID id, const wxString& title,
 
 	sbSizer9->Add(0, 0, 1, wxEXPAND, 5);
 
-	Minutes = new wxStaticText(this, wxID_ANY, wxT(" 0"), wxDefaultPosition,
+	Minutes = new wxStaticText(this, wxID_ANY, wxT("00"), wxDefaultPosition,
 			wxDefaultSize, 0);
 	Minutes->Wrap(-1);
 	Minutes->SetFont(wxFont(40, 76, 90, 90, false, wxT("Monospace")));
@@ -94,7 +92,7 @@ Timer::Timer(wxWindow* parent, wxWindowID id, const wxString& title,
 
 	sbSizer9->Add(0, 0, 1, wxEXPAND, 5);
 
-	Seconds = new wxStaticText(this, wxID_ANY, wxT(" 0"), wxDefaultPosition,
+	Seconds = new wxStaticText(this, wxID_ANY, wxT("00"), wxDefaultPosition,
 			wxDefaultSize, 0);
 	Seconds->Wrap(-1);
 	Seconds->SetFont(wxFont(40, 76, 90, 90, false, wxT("Monospace")));
@@ -223,5 +221,5 @@ void Timer::OnZeroTimer(wxCommandEvent& event) {
 }
 
 BEGIN_EVENT_TABLE(Timer,wxFrame)
-EVT_TIMER(TIMER_ID,Timer::OnTimer)
+EVT_TIMER(-1,Timer::OnTimer)
 END_EVENT_TABLE()
