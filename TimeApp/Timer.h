@@ -1,59 +1,50 @@
 /*
  * Timer.h
  *
- *  Created on: 24 lug 2016
+ *  Created on: 07 set 2016
  *      Author: alessio
  */
 
 #ifndef TIMER_H_
 #define TIMER_H_
 #include <wx/wx.h>
-#include <wx/spinctrl.h>
+#include "Subject.h"
+#include <list>
 
+class Timer : public Subject, public wxFrame {
+public:
+	Timer(){
+		initialized = false;
+		timer = new wxTimer(this);
+		seconds = 0;
+		minutes = 0;
+		hours = 0;
 
+	}
 
+	virtual ~Timer(){
+		delete timer;
+	}
 
-class Timer : public wxFrame
-{
+	virtual void start();
+	virtual void stop();
+	virtual void zero();
+	virtual void init(unsigned int h,unsigned int m,unsigned int s);
 
-	protected:
-		wxStaticText* HoursLabel;
-		wxSpinCtrl* HoursCtrl;
-		wxStaticText* MinsLabel;
-		wxSpinCtrl* MinsCtrl;
-		wxStaticText* SecLabel;
-		wxSpinCtrl* SecCtrl;
+	virtual void subscribe(Observer*o) override;
+	virtual void unsubscribe(Observer*o) override;
+	virtual void notifyTime() override;
+	virtual void notifyZero() override;
+	virtual void notifyInit() override;
 
-		wxStaticText* Hours;
-		wxStaticText* m_staticText22;
-		wxStaticText* Minutes;
-		wxStaticText* m_staticText23;
-		wxStaticText* Seconds;
-		wxButton* InitBtn;
+	void OnTimer(wxTimerEvent& event);
 
-		wxButton* StartBtn;
-		wxButton* StopBtn;
-		wxButton* ZeroBtn;
-
-		wxTimer* timer;
-		bool initialized;
-
-		unsigned int seconds,minutes,hours;
-
-		virtual void StopTimer( wxCommandEvent& event );
-		virtual void StartTimer( wxCommandEvent& event);
-		virtual void OnTimer(wxTimerEvent& event);
-		virtual void OnInitTimer(wxCommandEvent& event);
-		virtual void OnZeroTimer(wxCommandEvent& event);
-
-
-
-	public:
-
-		Timer( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Timer"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 627,481 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
-		virtual ~Timer();
-		DECLARE_EVENT_TABLE()
-
+protected:
+	std::list<Observer*> observers;
+	wxTimer* timer;
+	bool initialized;
+	unsigned int hours,minutes,seconds;
+	DECLARE_EVENT_TABLE()
 };
 
 #endif /* TIMER_H_ */
