@@ -140,6 +140,7 @@ TimerFrame::TimerFrame(Timer* t,wxWindow* parent, wxWindowID id, const wxString&
 				wxCommandEventHandler(TimerFrame::StartTimer), NULL, this);
 		StopBtn->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,
 				wxCommandEventHandler(TimerFrame::StopTimer), NULL, this);
+		delete subject;
 	}
 
 void TimerFrame::StopTimer(wxCommandEvent& event) {
