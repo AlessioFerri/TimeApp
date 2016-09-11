@@ -171,19 +171,12 @@ void TimerFrame::detach() {
 	subject->unsubscribe(this);
 }
 
-void TimerFrame::updateTime(unsigned int h,unsigned int m,unsigned int s) {
+void TimerFrame::update(unsigned int h,unsigned int m,unsigned int s) {
 
 	Seconds->SetLabel(wxString::Format(wxT("%i"), s));
 	Minutes->SetLabel(wxString::Format(wxT("%i"), m));
 	Hours->SetLabel(wxString::Format(wxT("%i"), h));
 }
 
-void TimerFrame::updateInit(unsigned int h,unsigned int m,unsigned int s) {
-	Hours->SetLabel(wxString::Format(wxT("%i"), h));
-	Minutes->SetLabel(wxString::Format(wxT("%i"), m));
-	Seconds->SetLabel(wxString::Format(wxT("%i"), s));
 
-
-
-}
 

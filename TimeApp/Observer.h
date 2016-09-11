@@ -13,8 +13,7 @@ public:
 	virtual ~Observer(){}
 	virtual void attach() = 0;
 	virtual void detach() = 0;
-	virtual void updateTime(unsigned int h,unsigned int m,unsigned int s) = 0;
-	virtual void updateInit(unsigned int h,unsigned int m,unsigned int s) = 0;
+	virtual void update(unsigned int h,unsigned int m,unsigned int s) = 0;
 };
 
 

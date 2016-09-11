@@ -23,7 +23,7 @@ void Timer::zero(){
 		minutes = 0;
 		hours = 0;
 		initialized = false;
-		notifyInit();
+		notify();
 }
 
 void Timer::init(unsigned int h,unsigned int m,unsigned int s){
@@ -31,7 +31,7 @@ void Timer::init(unsigned int h,unsigned int m,unsigned int s){
 	seconds = s;
 	minutes = m;
 	hours = h;
-	notifyInit();
+	notify();
 }
 
 
@@ -60,7 +60,7 @@ void Timer::OnTimer(wxTimerEvent& event){
 				timer->Stop();
 				initialized = false;
 				seconds = 0;
-				notifyTime();
+				notify();
 				wxMessageDialog *dial = new wxMessageDialog(NULL,
 						wxT("Time is out!"), wxT("Info"), wxOK);
 				dial->ShowModal();
@@ -71,37 +71,35 @@ void Timer::OnTimer(wxTimerEvent& event){
 
 					if (minutes != 0) {
 						minutes--;
-						notifyTime();
+						notify();
 					}
 
 					else if (hours != 0) {
 						hours--;
-						notifyTime();
+						notify();
 						minutes = 59;
-						notifyTime();
+						notify();
 					}
 					seconds = 59;
-					notifyTime();
+					notify();
 				}
 				seconds--;
-				notifyTime();
+				notify();
 
 			}
 		}
 
 }
 
-void Timer::notifyTime(){
+void Timer::notify(){
 	for(auto itr = observers.begin(); itr != observers.end();itr++)
-		(*itr)->updateTime(hours,minutes,seconds);
+		(*itr)->update(hours,minutes,seconds);
 }
-void Timer::notifyZero(){}
 
 
-void Timer::notifyInit(){
-	for(auto itr = observers.begin(); itr != observers.end(); itr++)
-		(*itr)->updateInit(hours,minutes,seconds);
-}
+
+
+
 
 BEGIN_EVENT_TABLE(Timer,wxFrame)
 EVT_TIMER(-1,Timer::OnTimer)

@@ -33,9 +33,7 @@ public:
 
 	virtual void subscribe(Observer*o) override;
 	virtual void unsubscribe(Observer*o) override;
-	virtual void notifyTime() override;
-	virtual void notifyZero() override;
-	virtual void notifyInit() override;
+	virtual void notify() override;
 
 	void OnTimer(wxTimerEvent& event);
 

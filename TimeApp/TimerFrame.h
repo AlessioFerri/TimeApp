@@ -51,8 +51,7 @@ public:
 
 	virtual void attach() override;
 	virtual void detach() override;
-	virtual void updateTime(unsigned int h, unsigned int m, unsigned int s) override;
-	virtual void updateInit(unsigned int h, unsigned int m, unsigned int s) override;
+	virtual void update(unsigned int h, unsigned int m, unsigned int s) override;
 
 };
 
