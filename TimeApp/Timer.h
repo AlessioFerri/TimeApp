@@ -11,38 +11,43 @@
 #include "Subject.h"
 #include <list>
 
-class Timer : public Subject, public wxFrame {
+class Timer: public Subject {
 public:
-	Timer(){
+	Timer() {
+
 		initialized = false;
-		timer = new wxTimer(this);
 		seconds = 0;
 		minutes = 0;
 		hours = 0;
 
 	}
 
-	virtual ~Timer(){
-		delete timer;
+	virtual ~Timer() {
 	}
 
-	virtual void start();
-	virtual void stop();
 	virtual void zero();
-	virtual void init(unsigned int h,unsigned int m,unsigned int s);
+	virtual void init(unsigned int h, unsigned int m, unsigned int s);
 
 	virtual void subscribe(Observer*o) override;
 	virtual void unsubscribe(Observer*o) override;
 	virtual void notify() override;
+	virtual void notifyFinish() override;
 
-	void OnTimer(wxTimerEvent& event);
+	void OnTimer();
+
+	bool isInitialized() const {
+		return initialized;
+	}
+
+	void setInitialized(bool initialized) {
+		this->initialized = initialized;
+	}
 
 protected:
 	std::list<Observer*> observers;
-	wxTimer* timer;
 	bool initialized;
-	unsigned int hours,minutes,seconds;
-	DECLARE_EVENT_TABLE()
+	unsigned int hours, minutes, seconds;
+
 };
 
 #endif /* TIMER_H_ */

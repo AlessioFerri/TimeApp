@@ -9,6 +9,7 @@
 #include "Clock.h"
 #include "Timer.h"
 #include "TimerFrame.h"
+#include "MyWxTimer.h"
 
 MainFrame::MainFrame(wxWindow* parent, wxWindowID id, const wxString& title,
 		const wxPoint& pos, const wxSize& size, long style) :
@@ -42,7 +43,7 @@ MainFrame::~MainFrame() {
 			wxCommandEventHandler(MainFrame::OpenClock), NULL, this);
 
 	TimerBtn->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,
-				wxCommandEventHandler(MainFrame::OpenTimer), NULL, this);
+			wxCommandEventHandler(MainFrame::OpenTimer), NULL, this);
 }
 
 void MainFrame::OpenClock(wxCommandEvent& event) {
@@ -51,8 +52,9 @@ void MainFrame::OpenClock(wxCommandEvent& event) {
 	c->Show(true);
 }
 
-void MainFrame::OpenTimer(wxCommandEvent& event){
-	Timer*ti = new Timer();
-	TimerFrame*t = new TimerFrame(ti,this);
+void MainFrame::OpenTimer(wxCommandEvent& event) {
+	Timer* timer = new Timer();
+	MyWxTimer*tmr = new MyWxTimer(timer);
+	TimerFrame*t = new TimerFrame(tmr, timer, this);
 	t->Show(true);
 }

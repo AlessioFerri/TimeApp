@@ -24,13 +24,13 @@ protected:
 	wxButton* ClockBtn;
 	wxButton* TimerBtn;
 
-	virtual void OpenClock( wxCommandEvent& event );
-	virtual void OpenTimer( wxCommandEvent& event );
+	virtual void OpenClock(wxCommandEvent& event);
+	virtual void OpenTimer(wxCommandEvent& event);
 
 public:
 
 	MainFrame(wxWindow* parent, wxWindowID id = wxID_ANY,
-			const wxString& title = wxEmptyString, const wxPoint& pos =
+			const wxString& title = wxT("TimeApp"), const wxPoint& pos =
 					wxDefaultPosition, const wxSize& size = wxSize(249, 134),
 			long style = wxDEFAULT_FRAME_STYLE | wxTAB_TRAVERSAL);
 

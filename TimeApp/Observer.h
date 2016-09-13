@@ -8,14 +8,13 @@
 #ifndef OBSERVER_H_
 #define OBSERVER_H_
 
-class Observer{
+class Observer {
 public:
-	virtual ~Observer(){}
+	virtual ~Observer() {}
 	virtual void attach() = 0;
 	virtual void detach() = 0;
-	virtual void update(unsigned int h,unsigned int m,unsigned int s) = 0;
+	virtual void update(unsigned int h, unsigned int m, unsigned int s) = 0;
+	virtual void updateFinish() = 0;
 };
-
-
 
 #endif /* OBSERVER_H_ */
