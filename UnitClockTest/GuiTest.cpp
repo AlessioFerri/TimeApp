@@ -75,11 +75,7 @@ TEST_F(GuiTest,ClockTest) {
 	wxYield();
 	act.Char(WXK_SPACE);
 	wxYield();
-	ASSERT_EQ(app->frame->Slot2->GetLabel(),d.Format(wxT("%x"))); // per date chackbox
-
-
-
-
+	ASSERT_EQ(app->frame->Slot2->GetLabel(),d.Format(wxT("%x"))); // per date checkbox
 
 }
 
