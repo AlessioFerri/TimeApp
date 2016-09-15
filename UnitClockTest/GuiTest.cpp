@@ -69,7 +69,7 @@ TEST_F(GuiTest,ClockTest) {
 
 	else{
 		ASSERT_EQ(app->frame->Slot1->GetLabel(), d.Format(wxT("%I:%M AM")));
-	}																		 // per AM/PM
+	}// per AM/PM
 
 	app->frame->DateCheck->SetFocus();
 	wxYield();
